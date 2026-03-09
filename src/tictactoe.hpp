@@ -1,3 +1,23 @@
-#include <string>
+#pragma once
 
-// Your functions go here
+#include <vector>
+
+using std::vector;
+
+class Board {
+private:
+    vector<vector<char>> grid;
+
+public:
+    Board();
+
+    void clear();
+
+    void print() const;
+
+    bool placeMark(int cell, char player);
+
+    bool checkWinner(char player) const;
+};
+
+int input_validate(int lower, int upper);
