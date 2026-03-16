@@ -13,9 +13,10 @@ int main() {
 
 
     char current_player = 'X';
-    int moves = 0;
+    int moves;
     bool new_game;
     do {
+        moves = 0;
         board.print();
         while (true) {
             cout << "Player " << current_player << ", choose a cell (1-9): ";
