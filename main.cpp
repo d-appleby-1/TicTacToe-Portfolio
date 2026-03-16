@@ -12,11 +12,12 @@ int main() {
     Board board;
 
 
-    char current_player = 'X';
+    char current_player;
     int moves;
     bool new_game;
     do {
         moves = 0;
+        current_player = 'X';
         board.print();
         while (true) {
             cout << "Player " << current_player << ", choose a cell (1-9): ";
@@ -49,8 +50,7 @@ int main() {
             current_player = (current_player == 'X') ? 'O' : 'X';
         }
         cout<<"Play again? Type '1' for yes and '2' for no."<<endl;
-        int selection = input_validate(1,2);
-        if (selection == 1) {
+        if (input_validate(1,2) == 1) {
             new_game = true;
         } else {
             new_game = false;
