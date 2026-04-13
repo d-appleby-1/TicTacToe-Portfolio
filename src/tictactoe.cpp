@@ -59,6 +59,17 @@ bool Board::checkWinner(char player) const {
     return false;
 }
 
+int Board::getFirstAvailable() const {
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            if (grid[i][j] != 'X' && grid[i][j] != 'O') {
+                return (i * 3) + j + 1;
+            }
+        }
+    }
+    return -1;
+}
+
 int input_validate(int lower, int upper) {
     int num;
     bool good_input;

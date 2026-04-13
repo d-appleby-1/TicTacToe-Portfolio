@@ -18,6 +18,8 @@ public:
     bool placeMark(int cell, char player);
 
     bool checkWinner(char player) const;
+
+    int getFirstAvailable() const;
 };
 
 int input_validate(int lower, int upper);
