@@ -60,3 +60,46 @@ TEST_CASE("checkWinner detects anti-diagonal wins") {
 
     REQUIRE(b.checkWinner('O') == true);
 }
+
+// --- NEW TESTS START HERE ---
+
+TEST_CASE("getFirstAvailable returns 1 on an empty board") {
+    Board b;
+    REQUIRE(b.getFirstAvailable() == 1);
+}
+
+TEST_CASE("getFirstAvailable correctly skips occupied cells") {
+    Board b;
+
+    b.placeMark(1, 'X');
+    b.placeMark(2, 'O');
+    REQUIRE(b.getFirstAvailable() == 3);
+
+    b.placeMark(3, 'X');
+    b.placeMark(4, 'O');
+    REQUIRE(b.getFirstAvailable() == 5);
+}
+
+TEST_CASE("getFirstAvailable returns -1 when the board is completely full") {
+    Board b;
+
+    for (int i = 1; i <= 9; i++) {
+        b.placeMark(i, 'X');
+    }
+
+    REQUIRE(b.getFirstAvailable() == -1);
+}
+
+TEST_CASE("clear resets the board completely") {
+    Board b;
+
+    b.placeMark(1, 'X');
+    b.placeMark(5, 'O');
+    b.placeMark(9, 'X');
+
+    b.clear();
+
+    REQUIRE(b.getFirstAvailable() == 1);
+    REQUIRE(b.placeMark(1, 'O') == true);
+    REQUIRE(b.placeMark(5, 'X') == true);
+}

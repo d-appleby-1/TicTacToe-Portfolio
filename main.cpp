@@ -6,6 +6,8 @@ using std::cout;
 using std::endl;
 using std::cin;
 
+int input_validate(int lower, int upper);
+
 int main() {
     cout << "Welcome to Tic-Tac-Toe!" << endl;
 
@@ -80,4 +82,20 @@ int main() {
     } while (new_game);
 
     return 0;
+}
+
+int input_validate(int lower, int upper) {
+    int num;
+    bool good_input;
+    do {
+        good_input = true;
+        cin >> num;
+        if (cin.fail() || num < lower || num > upper) {
+            cout << "Invalid input. Please try again."<<endl;
+            cin.clear();
+            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            good_input = false;
+        }
+    } while (!good_input);
+    return num;
 }

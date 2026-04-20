@@ -22,4 +22,3 @@ public:
     int getFirstAvailable() const;
 };
 
-int input_validate(int lower, int upper);

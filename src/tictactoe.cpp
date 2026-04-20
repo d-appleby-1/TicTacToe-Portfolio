@@ -70,18 +70,3 @@ int Board::getFirstAvailable() const {
     return -1;
 }
 
-int input_validate(int lower, int upper) {
-    int num;
-    bool good_input;
-    do {
-        good_input = true;
-        cin >> num;
-        if (cin.fail() || num < lower || num > upper) {
-            cout << "Invalid input. Please try again."<<endl;
-            cin.clear();
-            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            good_input = false;
-        }
-    } while (!good_input);
-    return num;
-}
