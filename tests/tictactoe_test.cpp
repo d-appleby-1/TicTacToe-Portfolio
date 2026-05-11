@@ -61,8 +61,6 @@ TEST_CASE("checkWinner detects anti-diagonal wins") {
     REQUIRE(b.checkWinner('O') == true);
 }
 
-// --- NEW TESTS START HERE ---
-
 TEST_CASE("getFirstAvailable returns 1 on an empty board") {
     Board b;
     REQUIRE(b.getFirstAvailable() == 1);
@@ -102,4 +100,47 @@ TEST_CASE("clear resets the board completely") {
     REQUIRE(b.getFirstAvailable() == 1);
     REQUIRE(b.placeMark(1, 'O') == true);
     REQUIRE(b.placeMark(5, 'X') == true);
+}
+
+TEST_CASE("Trap cell returns true but does not place a mark") {
+    Board b;
+    b.setTrap(5);
+
+    REQUIRE(b.placeMark(5, 'X') == true);  // trap triggers
+    REQUIRE(b.getCell(5) == '5');          // remains unchanged
+}
+
+TEST_CASE("Non-trap cells behave normally") {
+    Board b;
+    b.setTrap(5);
+
+    REQUIRE(b.placeMark(1, 'X') == true);
+    REQUIRE(b.getCell(1) == 'X');
+}
+
+TEST_CASE("Trap cell stays empty even after multiple attempts") {
+    Board b;
+    b.setTrap(5);
+
+    REQUIRE(b.placeMark(5, 'X') == true);
+    REQUIRE(b.placeMark(5, 'O') == true);
+    REQUIRE(b.getCell(5) == '5');   // still empty
+}
+
+TEST_CASE("Trap can be changed and behaves correctly") {
+    Board b;
+    b.setTrap(3);
+
+    REQUIRE(b.placeMark(3, 'X') == true);
+    REQUIRE(b.getCell(3) == '3');
+
+    b.setTrap(7);
+    REQUIRE(b.placeMark(7, 'O') == true);
+    REQUIRE(b.getCell(7) == '7');
+}
+
+TEST_CASE("getTrap returns correct trap cell") {
+    Board b;
+    b.setTrap(9);
+    REQUIRE(b.getTrap() == 9);
 }

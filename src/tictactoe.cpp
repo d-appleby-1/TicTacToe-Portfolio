@@ -34,6 +34,10 @@ void Board::print() const {
 }
 
 bool Board::placeMark(int cell, char player) {
+    if (cell == trap) {
+        cout << "It's a trap!" << endl;
+        return true;
+    }
     int row = (cell - 1) / 3;
     int col = (cell - 1) % 3;
 
@@ -69,4 +73,19 @@ int Board::getFirstAvailable() const {
     }
     return -1;
 }
+
+void Board::setTrap(int cell) {
+    trap = cell;
+}
+
+int Board::getTrap() {
+    return trap;
+}
+
+char Board::getCell(int cell) const {
+    int row = (cell - 1) / 3;
+    int col = (cell - 1) % 3;
+    return grid[row][col];
+}
+
 

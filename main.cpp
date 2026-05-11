@@ -1,6 +1,7 @@
 #include <iostream>
 #include "src/tictactoe.hpp"
 #include <limits>
+#include <ctime>
 
 using std::cout;
 using std::endl;
@@ -9,12 +10,14 @@ using std::cin;
 int input_validate(int lower, int upper);
 
 int main() {
+    srand(time(nullptr));
     cout << "Welcome to Tic-Tac-Toe!" << endl;
 
     Board board;
 
     bool new_game;
     do {
+
         cout << "\nSelect Game Mode:" << endl;
         cout << "1. Human vs Human" << endl;
         cout << "2. Human vs Computer" << endl;
@@ -29,19 +32,27 @@ int main() {
             comp_char = (comp_order == 1) ? 'X' : 'O';
         }
 
+        cout<<"\nEngage Trap Mode?"<<endl;
+        cout<<"1. Yes"<<endl;
+        cout<<"2. No"<<endl;
+        int trap_mode = input_validate(1, 2);
+        if (trap_mode == 1) {
+            board.setTrap(rand() % 9 + 1);
+        }
+
         int moves = 0;
         char current_player = 'X';
         board.print();
 
         while (true) {
+            int cell;
             if (game_mode == 2 && current_player == comp_char) {
-                int cell = board.getFirstAvailable();
+                cell = board.getFirstAvailable();
                 board.placeMark(cell, current_player);
                 cout << "Computer (Player " << current_player << ") chooses cell " << cell << "." << endl;
             } else {
                 cout << "Player " << current_player << ", choose a cell (1-9): ";
                 bool good_input;
-                int cell;
                 do {
                     good_input = true;
                     cell = input_validate(1,9);
@@ -51,8 +62,13 @@ int main() {
                     }
                 } while (!good_input);
             }
-
-            moves++;
+            if (!trap_mode) {
+                moves++;
+            } else {
+                if (board.getTrap() != cell) {
+                    moves++;
+                }
+            }
             board.print();
 
             if (board.checkWinner(current_player)) {
@@ -64,7 +80,7 @@ int main() {
                 break;
             }
 
-            if (moves == 9) {
+            if (moves == 9 || moves == 8 && trap_mode) {
                 cout << "It's a draw!" << endl;
                 break;
             }
