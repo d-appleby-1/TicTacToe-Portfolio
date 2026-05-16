@@ -1,14 +1,12 @@
-#include <vector>
-#include <iostream>
 #include "tictactoe.hpp"
-#include <limits>
 
+#include <iostream>
+
+using std::vector;
 using std::cout;
 using std::endl;
-using std::vector;
-using std::cin;
 
-Board::Board() {
+Board::Board() : trap(0) {
     grid = {
         {'1','2','3'},
         {'4','5','6'},
@@ -87,5 +85,3 @@ char Board::getCell(int cell) const {
     int col = (cell - 1) % 3;
     return grid[row][col];
 }
-
-

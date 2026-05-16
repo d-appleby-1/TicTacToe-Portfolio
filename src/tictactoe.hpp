@@ -2,11 +2,8 @@
 
 #include <vector>
 
-using std::vector;
-
 class Board {
-private:
-    vector<vector<char>> grid;
+    std::vector<std::vector<char>> grid;
     int trap;
 
 public:
@@ -28,4 +25,3 @@ public:
 
     char getCell(int cell) const;
 };
-
