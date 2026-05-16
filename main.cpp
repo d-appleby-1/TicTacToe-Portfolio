@@ -1,4 +1,4 @@
-#include "src/tictactoe.hpp"
+#include "src/game.h"
 
 int main() {
     Game game;
